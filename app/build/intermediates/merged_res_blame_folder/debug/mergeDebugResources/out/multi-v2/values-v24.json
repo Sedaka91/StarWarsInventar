@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.starwars.inventar.app-mergeDebugResources-66:/values-v24/values-v24.xml",
+            "map": [
+                {
+                    "source": "/home/sedaka/.gradle/caches/9.6.0/transforms/80f9fe2b7f26b66b6e9bc0b6581230ee/transformed/appcompat-1.6.1/res/values-v24/values-v24.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,212",
+                        "endColumns": "156,134",
+                        "endOffsets": "207,342"
+                    }
+                }
+            ]
+        }
+    ]
+}

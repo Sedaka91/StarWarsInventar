@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.starwars.inventar.app-mergeDebugResources-66:/values-hdpi-v4/values-hdpi-v4.xml",
+            "map": [
+                {
+                    "source": "/home/sedaka/.gradle/caches/9.6.0/transforms/80f9fe2b7f26b66b6e9bc0b6581230ee/transformed/appcompat-1.6.1/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "13",
+                        "endOffsets": "327"
+                    }
+                }
+            ]
+        }
+    ]
+}

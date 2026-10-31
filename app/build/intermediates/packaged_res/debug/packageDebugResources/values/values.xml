@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="datapad_bg">#FF03080D</color>
+    <color name="ic_launcher_background">#FF03080D</color>
+    <string name="app_name">Star Wars Inventar</string>
+    <style name="Theme.StarWarsInventar" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/datapad_bg</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

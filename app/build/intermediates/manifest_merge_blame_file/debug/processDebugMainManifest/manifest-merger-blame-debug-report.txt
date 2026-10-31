@@ -1,0 +1,273 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.starwars.inventar"
+4    android:versionCode="1"
+5    android:versionName="0.1.0" >
+6
+7    <uses-sdk
+7-->INJECTED
+8        android:minSdkVersion="26"
+8-->INJECTED
+9        android:targetSdkVersion="35" />
+9-->INJECTED
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:4:5-67
+11-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:4:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:5:5-79
+12-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:5:22-76
+13    <uses-permission android:name="android.permission.CAMERA" />
+13-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:6:5-65
+13-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:6:22-62
+14
+15    <uses-feature
+15-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:7:5-85
+16        android:name="android.hardware.camera"
+16-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:7:19-57
+17        android:required="false" />
+17-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:7:58-82
+18
+19    <permission
+19-->[androidx.core:core:1.15.0] /home/sedaka/.gradle/caches/9.6.0/transforms/cc072ba571b65d4d82dfeb0664f08edf/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+20        android:name="com.starwars.inventar.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+20-->[androidx.core:core:1.15.0] /home/sedaka/.gradle/caches/9.6.0/transforms/cc072ba571b65d4d82dfeb0664f08edf/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+21        android:protectionLevel="signature" />
+21-->[androidx.core:core:1.15.0] /home/sedaka/.gradle/caches/9.6.0/transforms/cc072ba571b65d4d82dfeb0664f08edf/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+22
+23    <uses-permission android:name="com.starwars.inventar.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+23-->[androidx.core:core:1.15.0] /home/sedaka/.gradle/caches/9.6.0/transforms/cc072ba571b65d4d82dfeb0664f08edf/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+23-->[androidx.core:core:1.15.0] /home/sedaka/.gradle/caches/9.6.0/transforms/cc072ba571b65d4d82dfeb0664f08edf/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+24
+25    <application
+25-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:9:5-29:19
+26        android:name="com.starwars.inventar.InventarApplication"
+26-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:10:9-44
+27        android:allowBackup="true"
+27-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:11:9-35
+28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+28-->[androidx.core:core:1.15.0] /home/sedaka/.gradle/caches/9.6.0/transforms/cc072ba571b65d4d82dfeb0664f08edf/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
+29        android:debuggable="true"
+30        android:extractNativeLibs="false"
+30-->INJECTED
+31        android:icon="@mipmap/ic_launcher"
+31-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:12:9-43
+32        android:label="@string/app_name"
+32-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:14:9-41
+33        android:roundIcon="@mipmap/ic_launcher"
+33-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:13:9-48
+34        android:supportsRtl="true"
+34-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:15:9-35
+35        android:testOnly="true"
+36        android:theme="@style/Theme.StarWarsInventar"
+36-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:17:9-54
+37        android:usesCleartextTraffic="true" >
+37-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:16:9-44
+38        <activity
+38-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:18:9-28:20
+39            android:name="com.starwars.inventar.MainActivity"
+39-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:19:13-41
+40            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden"
+40-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:22:13-106
+41            android:exported="true"
+41-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:20:13-36
+42            android:screenOrientation="sensorLandscape"
+42-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:21:13-56
+43            android:windowSoftInputMode="adjustResize" >
+43-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:23:13-55
+44            <intent-filter>
+44-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:24:13-27:29
+45                <action android:name="android.intent.action.MAIN" />
+45-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:25:17-69
+45-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:25:25-66
+46
+47                <category android:name="android.intent.category.LAUNCHER" />
+47-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:26:17-77
+47-->/home/sedaka/Documents/GIT/StarWarsInventar/app/src/main/AndroidManifest.xml:26:27-74
+48            </intent-filter>
+49        </activity>
+50
+51        <service
+51-->[androidx.camera:camera-camera2:1.4.1] /home/sedaka/.gradle/caches/9.6.0/transforms/4d89529325ee4c1801e1d885acb24486/transformed/camera-camera2-1.4.1/AndroidManifest.xml:24:9-33:19
+52            android:name="androidx.camera.core.impl.MetadataHolderService"
+52-->[androidx.camera:camera-camera2:1.4.1] /home/sedaka/.gradle/caches/9.6.0/transforms/4d89529325ee4c1801e1d885acb24486/transformed/camera-camera2-1.4.1/AndroidManifest.xml:25:13-75
+53            android:enabled="false"
+53-->[androidx.camera:camera-camera2:1.4.1] /home/sedaka/.gradle/caches/9.6.0/transforms/4d89529325ee4c1801e1d885acb24486/transformed/camera-camera2-1.4.1/AndroidManifest.xml:26:13-36
+54            android:exported="false" >
+54-->[androidx.camera:camera-camera2:1.4.1] /home/sedaka/.gradle/caches/9.6.0/transforms/4d89529325ee4c1801e1d885acb24486/transformed/camera-camera2-1.4.1/AndroidManifest.xml:27:13-37
+55            <meta-data
+55-->[androidx.camera:camera-camera2:1.4.1] /home/sedaka/.gradle/caches/9.6.0/transforms/4d89529325ee4c1801e1d885acb24486/transformed/camera-camera2-1.4.1/AndroidManifest.xml:30:13-32:89
+56                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+56-->[androidx.camera:camera-camera2:1.4.1] /home/sedaka/.gradle/caches/9.6.0/transforms/4d89529325ee4c1801e1d885acb24486/transformed/camera-camera2-1.4.1/AndroidManifest.xml:31:17-103
+57                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+57-->[androidx.camera:camera-camera2:1.4.1] /home/sedaka/.gradle/caches/9.6.0/transforms/4d89529325ee4c1801e1d885acb24486/transformed/camera-camera2-1.4.1/AndroidManifest.xml:32:17-86
+58        </service>
+59        <service
+59-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/82b270e0b4c8c52edb23904602472fd5/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:9:9-15:19
+60            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+60-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/82b270e0b4c8c52edb23904602472fd5/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:10:13-91
+61            android:directBootAware="true"
+61-->[com.google.mlkit:common:18.11.0] /home/sedaka/.gradle/caches/9.6.0/transforms/4b0b72d82068699242cec602bc799320/transformed/common-18.11.0/AndroidManifest.xml:17:13-43
+62            android:exported="false" >
+62-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/82b270e0b4c8c52edb23904602472fd5/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:11:13-37
+63            <meta-data
+63-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/82b270e0b4c8c52edb23904602472fd5/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:12:13-14:85
+64                android:name="com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar"
+64-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/82b270e0b4c8c52edb23904602472fd5/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:13:17-120
+65                android:value="com.google.firebase.components.ComponentRegistrar" />
+65-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/82b270e0b4c8c52edb23904602472fd5/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:14:17-82
+66            <meta-data
+66-->[com.google.mlkit:vision-common:17.3.0] /home/sedaka/.gradle/caches/9.6.0/transforms/c8ef3dc6c49ce29aa068eeac9a7ff892/transformed/vision-common-17.3.0/AndroidManifest.xml:12:13-14:85
+67                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+67-->[com.google.mlkit:vision-common:17.3.0] /home/sedaka/.gradle/caches/9.6.0/transforms/c8ef3dc6c49ce29aa068eeac9a7ff892/transformed/vision-common-17.3.0/AndroidManifest.xml:13:17-124
+68                android:value="com.google.firebase.components.ComponentRegistrar" />
+68-->[com.google.mlkit:vision-common:17.3.0] /home/sedaka/.gradle/caches/9.6.0/transforms/c8ef3dc6c49ce29aa068eeac9a7ff892/transformed/vision-common-17.3.0/AndroidManifest.xml:14:17-82
+69            <meta-data
+69-->[com.google.mlkit:common:18.11.0] /home/sedaka/.gradle/caches/9.6.0/transforms/4b0b72d82068699242cec602bc799320/transformed/common-18.11.0/AndroidManifest.xml:20:13-22:85
+70                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+70-->[com.google.mlkit:common:18.11.0] /home/sedaka/.gradle/caches/9.6.0/transforms/4b0b72d82068699242cec602bc799320/transformed/common-18.11.0/AndroidManifest.xml:21:17-120
+71                android:value="com.google.firebase.components.ComponentRegistrar" />
+71-->[com.google.mlkit:common:18.11.0] /home/sedaka/.gradle/caches/9.6.0/transforms/4b0b72d82068699242cec602bc799320/transformed/common-18.11.0/AndroidManifest.xml:22:17-82
+72        </service>
+73
+74        <provider
+74-->[com.google.mlkit:common:18.11.0] /home/sedaka/.gradle/caches/9.6.0/transforms/4b0b72d82068699242cec602bc799320/transformed/common-18.11.0/AndroidManifest.xml:9:9-13:38
+75            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+75-->[com.google.mlkit:common:18.11.0] /home/sedaka/.gradle/caches/9.6.0/transforms/4b0b72d82068699242cec602bc799320/transformed/common-18.11.0/AndroidManifest.xml:10:13-78
+76            android:authorities="com.starwars.inventar.mlkitinitprovider"
+76-->[com.google.mlkit:common:18.11.0] /home/sedaka/.gradle/caches/9.6.0/transforms/4b0b72d82068699242cec602bc799320/transformed/common-18.11.0/AndroidManifest.xml:11:13-69
+77            android:exported="false"
+77-->[com.google.mlkit:common:18.11.0] /home/sedaka/.gradle/caches/9.6.0/transforms/4b0b72d82068699242cec602bc799320/transformed/common-18.11.0/AndroidManifest.xml:12:13-37
+78            android:initOrder="99" />
+78-->[com.google.mlkit:common:18.11.0] /home/sedaka/.gradle/caches/9.6.0/transforms/4b0b72d82068699242cec602bc799320/transformed/common-18.11.0/AndroidManifest.xml:13:13-35
+79
+80        <activity
+80-->[com.google.android.gms:play-services-base:18.5.0] /home/sedaka/.gradle/caches/9.6.0/transforms/2f09532a669ee0f6e211694c3cc2aae0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+81            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+81-->[com.google.android.gms:play-services-base:18.5.0] /home/sedaka/.gradle/caches/9.6.0/transforms/2f09532a669ee0f6e211694c3cc2aae0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+82            android:exported="false"
+82-->[com.google.android.gms:play-services-base:18.5.0] /home/sedaka/.gradle/caches/9.6.0/transforms/2f09532a669ee0f6e211694c3cc2aae0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+83            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+83-->[com.google.android.gms:play-services-base:18.5.0] /home/sedaka/.gradle/caches/9.6.0/transforms/2f09532a669ee0f6e211694c3cc2aae0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+84
+85        <meta-data
+85-->[com.google.android.gms:play-services-basement:18.4.0] /home/sedaka/.gradle/caches/9.6.0/transforms/0ec98c45d4df19c75846ba249032da4b/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+86            android:name="com.google.android.gms.version"
+86-->[com.google.android.gms:play-services-basement:18.4.0] /home/sedaka/.gradle/caches/9.6.0/transforms/0ec98c45d4df19c75846ba249032da4b/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
+87            android:value="@integer/google_play_services_version" />
+87-->[com.google.android.gms:play-services-basement:18.4.0] /home/sedaka/.gradle/caches/9.6.0/transforms/0ec98c45d4df19c75846ba249032da4b/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+88
+89        <provider
+89-->[androidx.emoji2:emoji2:1.3.0] /home/sedaka/.gradle/caches/9.6.0/transforms/c8482172d15af504781df3b8899afb76/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+90            android:name="androidx.startup.InitializationProvider"
+90-->[androidx.emoji2:emoji2:1.3.0] /home/sedaka/.gradle/caches/9.6.0/transforms/c8482172d15af504781df3b8899afb76/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+91            android:authorities="com.starwars.inventar.androidx-startup"
+91-->[androidx.emoji2:emoji2:1.3.0] /home/sedaka/.gradle/caches/9.6.0/transforms/c8482172d15af504781df3b8899afb76/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+92            android:exported="false" >
+92-->[androidx.emoji2:emoji2:1.3.0] /home/sedaka/.gradle/caches/9.6.0/transforms/c8482172d15af504781df3b8899afb76/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+93            <meta-data
+93-->[androidx.emoji2:emoji2:1.3.0] /home/sedaka/.gradle/caches/9.6.0/transforms/c8482172d15af504781df3b8899afb76/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+94                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+94-->[androidx.emoji2:emoji2:1.3.0] /home/sedaka/.gradle/caches/9.6.0/transforms/c8482172d15af504781df3b8899afb76/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+95                android:value="androidx.startup" />
+95-->[androidx.emoji2:emoji2:1.3.0] /home/sedaka/.gradle/caches/9.6.0/transforms/c8482172d15af504781df3b8899afb76/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+96            <meta-data
+96-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/sedaka/.gradle/caches/9.6.0/transforms/11f709f3485cc0ed2ce84022f1ccc7e2/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+97                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+97-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/sedaka/.gradle/caches/9.6.0/transforms/11f709f3485cc0ed2ce84022f1ccc7e2/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+98                android:value="androidx.startup" />
+98-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/sedaka/.gradle/caches/9.6.0/transforms/11f709f3485cc0ed2ce84022f1ccc7e2/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+99            <meta-data
+99-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+100                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+100-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+101                android:value="androidx.startup" />
+101-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+102        </provider>
+103
+104        <activity
+104-->[androidx.compose.ui:ui-tooling-android:1.7.6] /home/sedaka/.gradle/caches/9.6.0/transforms/bedd1e6fca9ac872bb54dbe01ad0ccff/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+105            android:name="androidx.compose.ui.tooling.PreviewActivity"
+105-->[androidx.compose.ui:ui-tooling-android:1.7.6] /home/sedaka/.gradle/caches/9.6.0/transforms/bedd1e6fca9ac872bb54dbe01ad0ccff/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+106            android:exported="true" />
+106-->[androidx.compose.ui:ui-tooling-android:1.7.6] /home/sedaka/.gradle/caches/9.6.0/transforms/bedd1e6fca9ac872bb54dbe01ad0ccff/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+107
+108        <service
+108-->[androidx.room:room-runtime-android:2.8.5] /home/sedaka/.gradle/caches/9.6.0/transforms/e10530b3f71a5d4fc30aa54dbc6c9c4a/transformed/room-runtime/AndroidManifest.xml:24:9-28:63
+109            android:name="androidx.room.MultiInstanceInvalidationService"
+109-->[androidx.room:room-runtime-android:2.8.5] /home/sedaka/.gradle/caches/9.6.0/transforms/e10530b3f71a5d4fc30aa54dbc6c9c4a/transformed/room-runtime/AndroidManifest.xml:25:13-74
+110            android:directBootAware="true"
+110-->[androidx.room:room-runtime-android:2.8.5] /home/sedaka/.gradle/caches/9.6.0/transforms/e10530b3f71a5d4fc30aa54dbc6c9c4a/transformed/room-runtime/AndroidManifest.xml:26:13-43
+111            android:exported="false" />
+111-->[androidx.room:room-runtime-android:2.8.5] /home/sedaka/.gradle/caches/9.6.0/transforms/e10530b3f71a5d4fc30aa54dbc6c9c4a/transformed/room-runtime/AndroidManifest.xml:27:13-37
+112
+113        <receiver
+113-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+114            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+114-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+115            android:directBootAware="false"
+115-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+116            android:enabled="true"
+116-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+117            android:exported="true"
+117-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+118            android:permission="android.permission.DUMP" >
+118-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+119            <intent-filter>
+119-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+120                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+120-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+120-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+121            </intent-filter>
+122            <intent-filter>
+122-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+123                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+123-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+123-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+124            </intent-filter>
+125            <intent-filter>
+125-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+126                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+126-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+126-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+127            </intent-filter>
+128            <intent-filter>
+128-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+129                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+129-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+129-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/sedaka/.gradle/caches/9.6.0/transforms/17565d79deb8e85bc103242dacb5acbb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+130            </intent-filter>
+131        </receiver>
+132
+133        <service
+133-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/sedaka/.gradle/caches/9.6.0/transforms/eb0d393a7e8dbf26748a71206d7b819d/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:29:9-35:19
+134            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+134-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/sedaka/.gradle/caches/9.6.0/transforms/eb0d393a7e8dbf26748a71206d7b819d/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:30:13-103
+135            android:exported="false" >
+135-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/sedaka/.gradle/caches/9.6.0/transforms/eb0d393a7e8dbf26748a71206d7b819d/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:31:13-37
+136            <meta-data
+136-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/sedaka/.gradle/caches/9.6.0/transforms/eb0d393a7e8dbf26748a71206d7b819d/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:32:13-34:39
+137                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+137-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/sedaka/.gradle/caches/9.6.0/transforms/eb0d393a7e8dbf26748a71206d7b819d/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:33:17-94
+138                android:value="cct" />
+138-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/sedaka/.gradle/caches/9.6.0/transforms/eb0d393a7e8dbf26748a71206d7b819d/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:34:17-36
+139        </service>
+140        <service
+140-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/sedaka/.gradle/caches/9.6.0/transforms/38b3adc6d7c31d0495139498b44e3649/transformed/transport-runtime-2.2.6/AndroidManifest.xml:26:9-30:19
+141            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+141-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/sedaka/.gradle/caches/9.6.0/transforms/38b3adc6d7c31d0495139498b44e3649/transformed/transport-runtime-2.2.6/AndroidManifest.xml:27:13-117
+142            android:exported="false"
+142-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/sedaka/.gradle/caches/9.6.0/transforms/38b3adc6d7c31d0495139498b44e3649/transformed/transport-runtime-2.2.6/AndroidManifest.xml:28:13-37
+143            android:permission="android.permission.BIND_JOB_SERVICE" >
+143-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/sedaka/.gradle/caches/9.6.0/transforms/38b3adc6d7c31d0495139498b44e3649/transformed/transport-runtime-2.2.6/AndroidManifest.xml:29:13-69
+144        </service>
+145
+146        <receiver
+146-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/sedaka/.gradle/caches/9.6.0/transforms/38b3adc6d7c31d0495139498b44e3649/transformed/transport-runtime-2.2.6/AndroidManifest.xml:32:9-34:40
+147            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+147-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/sedaka/.gradle/caches/9.6.0/transforms/38b3adc6d7c31d0495139498b44e3649/transformed/transport-runtime-2.2.6/AndroidManifest.xml:33:13-132
+148            android:exported="false" />
+148-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/sedaka/.gradle/caches/9.6.0/transforms/38b3adc6d7c31d0495139498b44e3649/transformed/transport-runtime-2.2.6/AndroidManifest.xml:34:13-37
+149    </application>
+150
+151</manifest>
