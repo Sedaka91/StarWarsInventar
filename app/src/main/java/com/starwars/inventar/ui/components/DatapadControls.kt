@@ -48,17 +48,14 @@ import com.starwars.inventar.ui.formatDate
 import com.starwars.inventar.ui.theme.DatapadBg
 import com.starwars.inventar.ui.theme.DatapadTheme
 import com.starwars.inventar.ui.theme.HoloAmber
-import com.starwars.inventar.ui.theme.HoloCyan
 import com.starwars.inventar.ui.theme.HoloRed
-import com.starwars.inventar.ui.theme.TextDim
-import com.starwars.inventar.ui.theme.TextPrimary
 
 @Composable
 fun DatapadButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    accent: Color = HoloCyan,
+    accent: Color = HoloAmber,
     filled: Boolean = true,
     enabled: Boolean = true
 ) {
@@ -99,26 +96,26 @@ fun DatapadTextField(
         value = value,
         onValueChange = onValueChange,
         modifier = modifier.fillMaxWidth(),
-        label = { Text(label.uppercase()) },
+        label = { Text(label.uppercase(), color = Color.LightGray) },
         singleLine = singleLine,
         minLines = minLines,
         readOnly = readOnly,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         suffix = if (suffix != null) {
-            { Text(suffix) }
+            { Text(suffix, color = Color.LightGray) }
         } else null,
         trailingIcon = trailingIcon,
         shape = SmallCutShape,
         colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = HoloCyan,
-            unfocusedBorderColor = HoloCyan.copy(alpha = 0.4f),
-            focusedLabelColor = HoloCyan,
-            unfocusedLabelColor = TextDim,
+            focusedBorderColor = HoloAmber,
+            unfocusedBorderColor = Color(0xFF5A6478),
+            focusedLabelColor = HoloAmber,
+            unfocusedLabelColor = Color.LightGray,
             cursorColor = HoloAmber,
-            focusedTextColor = TextPrimary,
-            unfocusedTextColor = TextPrimary,
-            focusedSuffixColor = TextDim,
-            unfocusedSuffixColor = TextDim
+            focusedTextColor = Color.White,
+            unfocusedTextColor = Color.White,
+            focusedSuffixColor = Color.LightGray,
+            unfocusedSuffixColor = Color.LightGray
         )
     )
 }
@@ -154,7 +151,7 @@ fun <T> DatapadDropdownSelector(
         ExposedDropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = Modifier.background(DatapadBg)
+            modifier = Modifier.background(Color(0xFF151820))
         ) {
             options.forEach { option ->
                 DropdownMenuItem(
@@ -162,7 +159,7 @@ fun <T> DatapadDropdownSelector(
                         Text(
                             text = optionLabel(option).uppercase(),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = if (option == selected) HoloCyan else TextPrimary
+                            color = if (option == selected) HoloAmber else Color.White
                         )
                     },
                     onClick = {
@@ -190,7 +187,7 @@ fun <T> ChipSelector(
         Text(
             text = label.uppercase(),
             style = MaterialTheme.typography.labelMedium,
-            color = TextDim
+            color = Color.LightGray
         )
         Spacer(Modifier.height(6.dp))
         FlowRow(
@@ -211,15 +208,15 @@ fun <T> ChipSelector(
                     shape = CutCornerShape(topStart = 8.dp, bottomEnd = 8.dp),
                     colors = FilterChipDefaults.filterChipColors(
                         containerColor = Color.Transparent,
-                        labelColor = TextDim,
-                        selectedContainerColor = HoloCyan.copy(alpha = 0.25f),
-                        selectedLabelColor = HoloCyan
+                        labelColor = Color.LightGray,
+                        selectedContainerColor = HoloAmber.copy(alpha = 0.25f),
+                        selectedLabelColor = HoloAmber
                     ),
                     border = FilterChipDefaults.filterChipBorder(
                         enabled = true,
                         selected = isSelected,
-                        borderColor = HoloCyan.copy(alpha = 0.3f),
-                        selectedBorderColor = HoloCyan
+                        borderColor = Color(0xFF5A6478),
+                        selectedBorderColor = HoloAmber
                     )
                 )
             }
@@ -291,7 +288,7 @@ fun SwitchRow(
         Text(
             text = label.uppercase(),
             style = MaterialTheme.typography.labelMedium,
-            color = TextDim,
+            color = Color.LightGray,
             modifier = Modifier.weight(1f)
         )
         Switch(

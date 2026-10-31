@@ -36,13 +36,13 @@ public class AppDatabase_Impl : AppDatabase() {
   }
 
   protected override fun createOpenDelegate(): RoomOpenDelegate {
-    val _openDelegate: RoomOpenDelegate = object : RoomOpenDelegate(1, "9af6a12d996a71c874e7c8ea156565dd", "0289dbf27963d331419b0327fa225fd0") {
+    val _openDelegate: RoomOpenDelegate = object : RoomOpenDelegate(1, "230210c6cabe8bc0787e54b4e6523364", "9b7ce7818b846f9c7d78acce4f48748d") {
       public override fun createAllTables(connection: SQLiteConnection) {
-        connection.execSQL("CREATE TABLE IF NOT EXISTS `articles` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `category` TEXT NOT NULL, `status` TEXT NOT NULL, `description` TEXT NOT NULL, `owner` TEXT NOT NULL, `partner` TEXT NOT NULL, `quantity` INTEGER NOT NULL, `location` TEXT NOT NULL, `scene` TEXT NOT NULL, `costs` REAL NOT NULL, `price` REAL NOT NULL, `contractId` TEXT, `notes` TEXT NOT NULL, `hardwareId` TEXT NOT NULL, `deleted` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`contractId`) REFERENCES `contracts`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )")
+        connection.execSQL("CREATE TABLE IF NOT EXISTS `articles` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `category` TEXT NOT NULL, `status` TEXT NOT NULL, `description` TEXT NOT NULL, `owner` TEXT NOT NULL, `partner` TEXT NOT NULL, `quantity` INTEGER NOT NULL, `location` TEXT NOT NULL, `scene` TEXT NOT NULL, `costs` REAL NOT NULL, `price` REAL NOT NULL, `contractId` TEXT, `notes` TEXT NOT NULL, `hardwareId` TEXT NOT NULL, `deleted` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `imagePath` TEXT, `imageBase64` TEXT, PRIMARY KEY(`id`), FOREIGN KEY(`contractId`) REFERENCES `contracts`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )")
         connection.execSQL("CREATE INDEX IF NOT EXISTS `index_articles_contractId` ON `articles` (`contractId`)")
         connection.execSQL("CREATE TABLE IF NOT EXISTS `contracts` (`id` TEXT NOT NULL, `contractNumber` TEXT NOT NULL, `title` TEXT NOT NULL, `type` TEXT NOT NULL, `status` TEXT NOT NULL, `owner` TEXT NOT NULL, `partner` TEXT NOT NULL, `startDate` INTEGER, `endDate` INTEGER, `costs` REAL NOT NULL, `price` REAL NOT NULL, `deposit` REAL NOT NULL, `signed` INTEGER NOT NULL, `terms` TEXT NOT NULL, `notes` TEXT NOT NULL, `hardwareId` TEXT NOT NULL, `deleted` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`id`))")
         connection.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)")
-        connection.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9af6a12d996a71c874e7c8ea156565dd')")
+        connection.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '230210c6cabe8bc0787e54b4e6523364')")
       }
 
       public override fun dropAllTables(connection: SQLiteConnection) {
@@ -84,6 +84,8 @@ public class AppDatabase_Impl : AppDatabase() {
         _columnsArticles.put("hardwareId", TableInfo.Column("hardwareId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY))
         _columnsArticles.put("deleted", TableInfo.Column("deleted", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY))
         _columnsArticles.put("updatedAt", TableInfo.Column("updatedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY))
+        _columnsArticles.put("imagePath", TableInfo.Column("imagePath", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY))
+        _columnsArticles.put("imageBase64", TableInfo.Column("imageBase64", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY))
         val _foreignKeysArticles: MutableSet<TableInfo.ForeignKey> = mutableSetOf()
         _foreignKeysArticles.add(TableInfo.ForeignKey("contracts", "SET NULL", "NO ACTION", listOf("contractId"), listOf("id")))
         val _indicesArticles: MutableSet<TableInfo.Index> = mutableSetOf()

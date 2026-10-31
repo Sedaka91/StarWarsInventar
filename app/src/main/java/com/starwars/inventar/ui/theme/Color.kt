@@ -2,18 +2,18 @@ package com.starwars.inventar.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Hintergrund: tiefes Blauschwarz wie ein ausgeschaltetes Display
-val DatapadBg = Color(0xFF03080D)
-val DatapadBgTop = Color(0xFF0A1B28)
-val DatapadSurface = Color(0xFF0A1822)
-val DatapadSurfaceHigh = Color(0xFF10263A)
+// Neutraler Industrie-Charcoal-Hintergrund (ohne Blaustich)
+val DatapadBg = Color(0xFF07080A)
+val DatapadBgTop = Color(0xFF0D1015)
+val DatapadSurface = Color(0xFF11141B)
+val DatapadSurfaceHigh = Color(0xFF181D26)
 
-// Holo-Akzente
-val HoloCyan = Color(0xFF4FD8FF)
-val HoloAmber = Color(0xFFFFB347)
-val HoloGreen = Color(0xFF5CFFA8)
+// Serris Transit Farbpalette (Gold/Amber & Taktisches Industrie-Grün)
+val HoloAmber = Color(0xFFE5A93B) // Industrielles Gold / Gelb
+val HoloGreen = Color(0xFF4E9F64) // Taktisches Industrie-Grün
+val HoloCyan = Color(0xFFE5A93B)  // Mappt alle bisherigen Akzente auf das edle Katalog-Gold
 val HoloRed = Color(0xFFFF5C5C)
 
 // Text
-val TextPrimary = Color(0xFFD6F3FF)
-val TextDim = Color(0xFF7FA6B8)
+val TextPrimary = Color(0xFFECEFF4)
+val TextDim = Color(0xFF8B9BB4)

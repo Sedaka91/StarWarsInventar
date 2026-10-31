@@ -104,5 +104,7 @@ data class Article(
     val notes: String = "",
     val hardwareId: String = "",
     var deleted: Boolean = false,
-    val updatedAt: Long = System.currentTimeMillis()
+    val updatedAt: Long = System.currentTimeMillis(),
+    val imagePath: String? = null,
+    val imageBase64: String? = null
 )

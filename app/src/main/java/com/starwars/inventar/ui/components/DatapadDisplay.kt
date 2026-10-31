@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,7 +29,6 @@ import com.starwars.inventar.ui.theme.HoloCyan
 import com.starwars.inventar.ui.theme.HoloGreen
 import com.starwars.inventar.ui.theme.HoloRed
 import com.starwars.inventar.ui.theme.TextDim
-import com.starwars.inventar.ui.theme.TextPrimary
 
 /** Abgeschrägte Ecken oben links und unten rechts: das Datapad-Markenzeichen. */
 val PanelShape = CutCornerShape(topStart = 14.dp, bottomEnd = 14.dp)
@@ -40,16 +38,19 @@ val SmallCutShape = CutCornerShape(topStart = 8.dp, bottomEnd = 8.dp)
 @Composable
 fun HoloPanel(
     modifier: Modifier = Modifier,
-    accent: Color = HoloCyan,
+    accent: Color = HoloAmber,
     title: String? = null,
     onClick: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
+    val cardBg = Color(0xFF151820).copy(alpha = 0.7f)
+    val cardBorder = Color(0xFF5A6478)
+
     val base = modifier
         .fillMaxWidth()
         .clip(PanelShape)
-        .background(Brush.linearGradient(listOf(accent.copy(alpha = 0.14f), accent.copy(alpha = 0.04f))))
-        .border(1.dp, accent.copy(alpha = 0.7f), PanelShape)
+        .background(cardBg)
+        .border(1.dp, cardBorder, PanelShape)
     val interactive = if (onClick != null) base.clickable(onClick = onClick) else base
 
     Column(
@@ -60,7 +61,7 @@ fun HoloPanel(
             Text(
                 text = title.uppercase(),
                 style = MaterialTheme.typography.labelMedium,
-                color = accent
+                color = HoloAmber
             )
         }
         content()
@@ -81,7 +82,7 @@ fun StatusBadge(text: String, color: Color, modifier: Modifier = Modifier) {
 
 /** Zeile mit Bezeichnung links und Wert rechts. */
 @Composable
-fun DataRow(label: String, value: String, modifier: Modifier = Modifier, valueColor: Color = TextPrimary) {
+fun DataRow(label: String, value: String, modifier: Modifier = Modifier, valueColor: Color = Color.White) {
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -90,7 +91,7 @@ fun DataRow(label: String, value: String, modifier: Modifier = Modifier, valueCo
         Text(
             text = label.uppercase(),
             style = MaterialTheme.typography.labelSmall,
-            color = TextDim
+            color = Color.LightGray
         )
         Text(
             text = value,
@@ -111,7 +112,7 @@ fun EmptyState(text: String, modifier: Modifier = Modifier) {
         Text(
             text = text.uppercase(),
             style = MaterialTheme.typography.labelMedium,
-            color = TextDim,
+            color = Color.LightGray,
             textAlign = TextAlign.Center
         )
     }

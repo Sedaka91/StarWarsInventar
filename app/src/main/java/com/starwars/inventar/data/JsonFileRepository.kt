@@ -3,6 +3,7 @@ package com.starwars.inventar.data
 import android.content.Context
 import android.os.Build
 import android.provider.Settings
+import android.util.Base64
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,14 +22,7 @@ class JsonFileRepository(private val context: Context) {
     }
 
     private val baseDir: File by lazy {
-        val internalDir = File(context.filesDir, "inventory").also { if (!it.exists()) it.mkdirs() }
-        runCatching {
-            val extDir = context.getExternalFilesDir(null)?.let { File(it, "inventory") }
-            if (extDir != null && extDir.exists() && (internalDir.listFiles()?.isEmpty() != false)) {
-                extDir.copyRecursively(internalDir, overwrite = false)
-            }
-        }
-        internalDir
+        File(context.filesDir, "inventory").also { if (!it.exists()) it.mkdirs() }
     }
 
     private val articlesDir: File by lazy {
@@ -106,6 +100,18 @@ class JsonFileRepository(private val context: Context) {
         _userConfig.value = toSave
     }
 
+    fun clearAllData() {
+        runCatching {
+            articlesDir.listFiles()?.forEach { it.delete() }
+            contractsDir.listFiles()?.forEach { it.delete() }
+            val imagesDir = File(baseDir, "article_images")
+            if (imagesDir.exists()) {
+                imagesDir.listFiles()?.forEach { it.delete() }
+            }
+            reloadFromDisk()
+        }
+    }
+
     fun applySyncBundle(newArticles: List<Article>, newContracts: List<Contract>, serverConfig: UserConfig?) {
         newArticles.forEach { mergeAndWriteArticle(it) }
         newContracts.forEach { mergeAndWriteContract(it) }
@@ -158,11 +164,19 @@ class JsonFileRepository(private val context: Context) {
                     runCatching {
                         val art = json.decodeFromString<Article>(file.readText())
                         if (art.deleted) return@mapNotNull null
-                        if (art.hardwareId.isBlank() && myHwId.isNotBlank()) {
-                            val patched = art.copy(hardwareId = myHwId, updatedAt = System.currentTimeMillis())
-                            writeArticleDirect(patched)
-                            patched
+
+                        val localPath = if (art.imagePath.isNullOrBlank() && !art.imageBase64.isNullOrBlank()) {
+                            decodeBase64ToLocalFile(art.imageBase64)
+                        } else {
+                            art.imagePath
+                        }
+
+                        val finalArt = if (art.hardwareId.isBlank() && myHwId.isNotBlank() || localPath != art.imagePath) {
+                            art.copy(hardwareId = if (art.hardwareId.isBlank()) myHwId else art.hardwareId, imagePath = localPath, updatedAt = System.currentTimeMillis())
                         } else art
+
+                        writeArticleDirect(finalArt)
+                        finalArt
                     }.getOrNull()
                 }
                 ?.sortedBy { it.name.lowercase() }
@@ -246,6 +260,28 @@ class JsonFileRepository(private val context: Context) {
         reloadFromDisk()
     }
 
+    private fun encodeImageToBase64(path: String?): String? {
+        if (path.isNullOrBlank()) return null
+        return runCatching {
+            val file = File(path)
+            if (file.exists()) {
+                val bytes = file.readBytes()
+                Base64.encodeToString(bytes, Base64.NO_WRAP)
+            } else null
+        }.getOrNull()
+    }
+
+    private fun decodeBase64ToLocalFile(base64Str: String?): String? {
+        if (base64Str.isNullOrBlank()) return null
+        return runCatching {
+            val bytes = Base64.decode(base64Str, Base64.NO_WRAP)
+            val imagesDir = File(baseDir, "article_images").also { if (!it.exists()) it.mkdirs() }
+            val destFile = File(imagesDir, "sync_img_${System.currentTimeMillis()}.png")
+            destFile.writeBytes(bytes)
+            destFile.absolutePath
+        }.getOrNull()
+    }
+
     private fun mergeAndWriteArticle(incoming: Article) {
         val file = File(articlesDir, "${incoming.id}.json")
         val myHwId = _userConfig.value.deviceId.ifBlank { generateHardwareId() }
@@ -271,7 +307,20 @@ class JsonFileRepository(private val context: Context) {
         runCatching {
             val hwId = article.hardwareId.ifBlank { _userConfig.value.deviceId.ifBlank { generateHardwareId() } }
             val timestamp = if (article.updatedAt == 0L) System.currentTimeMillis() else article.updatedAt
-            val toWrite = article.copy(hardwareId = hwId, updatedAt = timestamp)
+
+            val b64 = article.imageBase64 ?: encodeImageToBase64(article.imagePath)
+            val localPath = if (article.imagePath.isNullOrBlank() && !b64.isNullOrBlank()) {
+                decodeBase64ToLocalFile(b64)
+            } else {
+                article.imagePath
+            }
+
+            val toWrite = article.copy(
+                hardwareId = hwId,
+                updatedAt = timestamp,
+                imagePath = localPath,
+                imageBase64 = b64
+            )
             val file = File(articlesDir, "${toWrite.id}.json")
             val content = json.encodeToString(toWrite)
             file.writeText(content)

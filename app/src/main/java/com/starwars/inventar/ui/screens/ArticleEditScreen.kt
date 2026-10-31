@@ -1,15 +1,26 @@
 package com.starwars.inventar.ui.screens
 
+import android.content.Context
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -18,7 +29,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,11 +50,13 @@ import com.starwars.inventar.ui.components.DatapadDropdownSelector
 import com.starwars.inventar.ui.components.DatapadScreen
 import com.starwars.inventar.ui.components.DatapadTextField
 import com.starwars.inventar.ui.components.HoloPanel
+import com.starwars.inventar.ui.components.SmallCutShape
 import com.starwars.inventar.ui.decimalToText
 import com.starwars.inventar.ui.parseDecimal
 import com.starwars.inventar.ui.theme.DatapadTheme
 import com.starwars.inventar.ui.theme.HoloAmber
 import com.starwars.inventar.ui.theme.HoloRed
+import java.io.File
 
 @Composable
 fun ArticleEditScreen(
@@ -72,20 +90,50 @@ fun ArticleEditScreen(
     }
 }
 
+private fun saveArticleImageFromUri(context: Context, uri: Uri): String? {
+    return runCatching {
+        val parent = runCatching { context.getExternalFilesDir(null) }.getOrNull() ?: context.filesDir
+        val inventoryDir = File(parent, "inventory").let { File(it, "article_images") }
+        if (!inventoryDir.exists()) {
+            inventoryDir.mkdirs()
+        }
+        val destFile = File(inventoryDir, "article_${System.currentTimeMillis()}.png")
+
+        context.contentResolver.openInputStream(uri)?.use { input ->
+            destFile.outputStream().use { output ->
+                input.copyTo(output)
+            }
+        }
+        destFile.absolutePath
+    }.getOrNull()
+}
+
 @Composable
 fun ArticleEditContent(
-    initialArticle: Article = Article(),
+    initialArticle: Article = remember { Article() },
     contracts: List<Contract> = emptyList(),
     isNew: Boolean = true,
     onSave: (Article) -> Unit = {},
     onDelete: (() -> Unit)? = null,
     onClose: () -> Unit = {}
 ) {
-    var draft by remember(initialArticle) { mutableStateOf(initialArticle) }
-    var costsText by remember(initialArticle) { mutableStateOf(decimalToText(initialArticle.costs)) }
-    var priceText by remember(initialArticle) { mutableStateOf(decimalToText(initialArticle.price)) }
-    var quantityText by remember(initialArticle) { mutableStateOf(initialArticle.quantity.toString()) }
+    val context = LocalContext.current
+    var draft by remember { mutableStateOf(initialArticle) }
+    var costsText by remember { mutableStateOf(decimalToText(initialArticle.costs)) }
+    var priceText by remember { mutableStateOf(decimalToText(initialArticle.price)) }
+    var quantityText by remember { mutableStateOf(draft.quantity.toString()) }
     var confirmDelete by remember { mutableStateOf(false) }
+
+    val imagePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let { selectedUri ->
+            val savedPath = saveArticleImageFromUri(context, selectedUri)
+            if (savedPath != null) {
+                draft = draft.copy(imagePath = savedPath)
+            }
+        }
+    }
 
     val contractOptions = remember(contracts) { listOf<String?>(null) + contracts.map { it.id } }
 
@@ -103,6 +151,51 @@ fun ArticleEditContent(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             HoloPanel(title = "Stammdaten") {
+                // Artikelbild Bereich: Klick = Bild laden, Langer Klick = Bild entfernen (kein extra Button)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(72.dp)
+                            .clip(SmallCutShape)
+                            .background(HoloAmber.copy(alpha = 0.15f))
+                            .border(1.dp, HoloAmber, SmallCutShape)
+                            .pointerInput(Unit) {
+                                detectTapGestures(
+                                    onTap = { imagePickerLauncher.launch("image/*") },
+                                    onLongPress = { draft = draft.copy(imagePath = null) }
+                                )
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        ArticleImageView(
+                            imagePath = draft.imagePath,
+                            fallbackCategory = draft.category,
+                            modifier = Modifier.size(72.dp),
+                            tint = HoloAmber
+                        )
+                    }
+
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = "ARTIKELBILD",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = HoloAmber
+                        )
+                        Text(
+                            text = "Tippen zum Laden · Länger gedrückt halten zum Löschen",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = Color.LightGray
+                        )
+                    }
+                }
+
                 DatapadTextField(
                     value = draft.name,
                     onValueChange = { draft = draft.copy(name = it) },

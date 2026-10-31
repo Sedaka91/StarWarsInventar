@@ -118,13 +118,14 @@ fun ContractListContent(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Spacer(Modifier.height(4.dp))
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(modifier = Modifier.weight(1f)) {
-                    DatapadTextField(value = query, onValueChange = { query = it }, label = "Suche")
+                    DatapadTextField(value = query, onValueChange = { query = it }, label = "Vertrags-Suche")
                 }
                 DatapadButton(
                     text = if (showFilters) "Filter aus" else "Filter & Sort",
@@ -135,7 +136,7 @@ fun ContractListContent(
             }
 
             if (showFilters) {
-                HoloPanel(accent = HoloAmber, title = "Filter & Sortierung") {
+                HoloPanel(accent = HoloAmber, title = "Vertrags-Filter & Sortierung") {
                     val typeOptions = listOf<ContractType?>(null) + ContractType.entries
                     DatapadDropdownSelector(
                         label = "Vertragsart-Filter",
@@ -165,7 +166,7 @@ fun ContractListContent(
             }
 
             if (filtered.isEmpty()) {
-                EmptyState(if (contracts.isEmpty()) "Noch keine Verträge erfasst" else "Keine Treffer")
+                EmptyState(if (contracts.isEmpty()) "Noch keine Verträge im Katalog erfasst" else "Keine Treffer im Vertragskatalog")
             } else {
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -190,7 +191,7 @@ private fun ContractCard(contract: Contract, onClick: () -> Unit) {
     HoloPanel(accent = HoloAmber, onClick = onClick) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = heading,
+                text = heading.uppercase(),
                 style = MaterialTheme.typography.titleMedium,
                 color = TextPrimary,
                 modifier = Modifier.weight(1f)
@@ -198,20 +199,34 @@ private fun ContractCard(contract: Contract, onClick: () -> Unit) {
             StatusBadge(contract.status.label, contractStatusColor(contract.status))
         }
         Text(
-            text = contract.type.label + if (contract.signed) " · unterzeichnet" else "",
-            style = MaterialTheme.typography.bodySmall,
-            color = TextDim
+            text = "${contract.type.label.uppercase()}${if (contract.signed) " · UNTERZEICHNET" else ""}",
+            style = MaterialTheme.typography.labelMedium,
+            color = HoloAmber
         )
-        DataRow("Besitzer", contract.owner.ifBlank { "–" })
-        DataRow("Partner", contract.partner.ifBlank { "–" })
+        DataRow("Auftraggeber", contract.owner.ifBlank { "–" })
+        DataRow("Vertragspartner", contract.partner.ifBlank { "–" })
         if (contract.startDate != null || contract.endDate != null) {
             DataRow(
                 "Laufzeit",
                 "${formatDate(contract.startDate).ifBlank { "?" }} – ${formatDate(contract.endDate).ifBlank { "offen" }}"
             )
         }
-        DataRow("Kosten", formatCredits(contract.costs))
-        DataRow("Preis", formatCredits(contract.price))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "WERT: ${formatCredits(contract.price)}",
+                style = MaterialTheme.typography.labelLarge,
+                color = HoloAmber
+            )
+            Text(
+                text = "KOSTEN: ${formatCredits(contract.costs)}",
+                style = MaterialTheme.typography.labelSmall,
+                color = TextDim
+            )
+        }
     }
 }
 

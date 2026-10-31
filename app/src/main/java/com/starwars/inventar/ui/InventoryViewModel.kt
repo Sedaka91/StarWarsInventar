@@ -8,10 +8,12 @@ import com.starwars.inventar.data.Article
 import com.starwars.inventar.data.Contract
 import com.starwars.inventar.data.UserConfig
 import com.starwars.inventar.data.WlanSyncManager
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class InventoryViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -37,6 +39,15 @@ class InventoryViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             repository.saveUserConfig(config)
             onDone()
+        }
+    }
+
+    fun clearAllData(onDone: () -> Unit = {}) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.clearAllData()
+            withContext(Dispatchers.Main) {
+                onDone()
+            }
         }
     }
 

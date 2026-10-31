@@ -33,7 +33,7 @@ public class ArticleDao_Impl(
   init {
     this.__db = __db
     this.__upsertAdapterOfArticle = EntityUpsertAdapter<Article>(object : EntityInsertAdapter<Article>() {
-      protected override fun createQuery(): String = "INSERT INTO `articles` (`id`,`name`,`category`,`status`,`description`,`owner`,`partner`,`quantity`,`location`,`scene`,`costs`,`price`,`contractId`,`notes`,`hardwareId`,`deleted`,`updatedAt`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+      protected override fun createQuery(): String = "INSERT INTO `articles` (`id`,`name`,`category`,`status`,`description`,`owner`,`partner`,`quantity`,`location`,`scene`,`costs`,`price`,`contractId`,`notes`,`hardwareId`,`deleted`,`updatedAt`,`imagePath`,`imageBase64`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
 
       protected override fun bind(statement: SQLiteStatement, entity: Article) {
         statement.bindText(1, entity.id)
@@ -59,9 +59,21 @@ public class ArticleDao_Impl(
         val _tmp: Int = if (entity.deleted) 1 else 0
         statement.bindLong(16, _tmp.toLong())
         statement.bindLong(17, entity.updatedAt)
+        val _tmpImagePath: String? = entity.imagePath
+        if (_tmpImagePath == null) {
+          statement.bindNull(18)
+        } else {
+          statement.bindText(18, _tmpImagePath)
+        }
+        val _tmpImageBase64: String? = entity.imageBase64
+        if (_tmpImageBase64 == null) {
+          statement.bindNull(19)
+        } else {
+          statement.bindText(19, _tmpImageBase64)
+        }
       }
     }, object : EntityDeleteOrUpdateAdapter<Article>() {
-      protected override fun createQuery(): String = "UPDATE `articles` SET `id` = ?,`name` = ?,`category` = ?,`status` = ?,`description` = ?,`owner` = ?,`partner` = ?,`quantity` = ?,`location` = ?,`scene` = ?,`costs` = ?,`price` = ?,`contractId` = ?,`notes` = ?,`hardwareId` = ?,`deleted` = ?,`updatedAt` = ? WHERE `id` = ?"
+      protected override fun createQuery(): String = "UPDATE `articles` SET `id` = ?,`name` = ?,`category` = ?,`status` = ?,`description` = ?,`owner` = ?,`partner` = ?,`quantity` = ?,`location` = ?,`scene` = ?,`costs` = ?,`price` = ?,`contractId` = ?,`notes` = ?,`hardwareId` = ?,`deleted` = ?,`updatedAt` = ?,`imagePath` = ?,`imageBase64` = ? WHERE `id` = ?"
 
       protected override fun bind(statement: SQLiteStatement, entity: Article) {
         statement.bindText(1, entity.id)
@@ -87,7 +99,19 @@ public class ArticleDao_Impl(
         val _tmp: Int = if (entity.deleted) 1 else 0
         statement.bindLong(16, _tmp.toLong())
         statement.bindLong(17, entity.updatedAt)
-        statement.bindText(18, entity.id)
+        val _tmpImagePath: String? = entity.imagePath
+        if (_tmpImagePath == null) {
+          statement.bindNull(18)
+        } else {
+          statement.bindText(18, _tmpImagePath)
+        }
+        val _tmpImageBase64: String? = entity.imageBase64
+        if (_tmpImageBase64 == null) {
+          statement.bindNull(19)
+        } else {
+          statement.bindText(19, _tmpImageBase64)
+        }
+        statement.bindText(20, entity.id)
       }
     })
   }
@@ -119,6 +143,8 @@ public class ArticleDao_Impl(
         val _columnIndexOfHardwareId: Int = getColumnIndexOrThrow(_stmt, "hardwareId")
         val _columnIndexOfDeleted: Int = getColumnIndexOrThrow(_stmt, "deleted")
         val _columnIndexOfUpdatedAt: Int = getColumnIndexOrThrow(_stmt, "updatedAt")
+        val _columnIndexOfImagePath: Int = getColumnIndexOrThrow(_stmt, "imagePath")
+        val _columnIndexOfImageBase64: Int = getColumnIndexOrThrow(_stmt, "imageBase64")
         val _result: MutableList<Article> = mutableListOf()
         while (_stmt.step()) {
           val _item: Article
@@ -162,7 +188,19 @@ public class ArticleDao_Impl(
           _tmpDeleted = _tmp != 0
           val _tmpUpdatedAt: Long
           _tmpUpdatedAt = _stmt.getLong(_columnIndexOfUpdatedAt)
-          _item = Article(_tmpId,_tmpName,_tmpCategory,_tmpStatus,_tmpDescription,_tmpOwner,_tmpPartner,_tmpQuantity,_tmpLocation,_tmpScene,_tmpCosts,_tmpPrice,_tmpContractId,_tmpNotes,_tmpHardwareId,_tmpDeleted,_tmpUpdatedAt)
+          val _tmpImagePath: String?
+          if (_stmt.isNull(_columnIndexOfImagePath)) {
+            _tmpImagePath = null
+          } else {
+            _tmpImagePath = _stmt.getText(_columnIndexOfImagePath)
+          }
+          val _tmpImageBase64: String?
+          if (_stmt.isNull(_columnIndexOfImageBase64)) {
+            _tmpImageBase64 = null
+          } else {
+            _tmpImageBase64 = _stmt.getText(_columnIndexOfImageBase64)
+          }
+          _item = Article(_tmpId,_tmpName,_tmpCategory,_tmpStatus,_tmpDescription,_tmpOwner,_tmpPartner,_tmpQuantity,_tmpLocation,_tmpScene,_tmpCosts,_tmpPrice,_tmpContractId,_tmpNotes,_tmpHardwareId,_tmpDeleted,_tmpUpdatedAt,_tmpImagePath,_tmpImageBase64)
           _result.add(_item)
         }
         _result
@@ -196,6 +234,8 @@ public class ArticleDao_Impl(
         val _columnIndexOfHardwareId: Int = getColumnIndexOrThrow(_stmt, "hardwareId")
         val _columnIndexOfDeleted: Int = getColumnIndexOrThrow(_stmt, "deleted")
         val _columnIndexOfUpdatedAt: Int = getColumnIndexOrThrow(_stmt, "updatedAt")
+        val _columnIndexOfImagePath: Int = getColumnIndexOrThrow(_stmt, "imagePath")
+        val _columnIndexOfImageBase64: Int = getColumnIndexOrThrow(_stmt, "imageBase64")
         val _result: Article?
         if (_stmt.step()) {
           val _tmpId: String
@@ -238,7 +278,19 @@ public class ArticleDao_Impl(
           _tmpDeleted = _tmp != 0
           val _tmpUpdatedAt: Long
           _tmpUpdatedAt = _stmt.getLong(_columnIndexOfUpdatedAt)
-          _result = Article(_tmpId,_tmpName,_tmpCategory,_tmpStatus,_tmpDescription,_tmpOwner,_tmpPartner,_tmpQuantity,_tmpLocation,_tmpScene,_tmpCosts,_tmpPrice,_tmpContractId,_tmpNotes,_tmpHardwareId,_tmpDeleted,_tmpUpdatedAt)
+          val _tmpImagePath: String?
+          if (_stmt.isNull(_columnIndexOfImagePath)) {
+            _tmpImagePath = null
+          } else {
+            _tmpImagePath = _stmt.getText(_columnIndexOfImagePath)
+          }
+          val _tmpImageBase64: String?
+          if (_stmt.isNull(_columnIndexOfImageBase64)) {
+            _tmpImageBase64 = null
+          } else {
+            _tmpImageBase64 = _stmt.getText(_columnIndexOfImageBase64)
+          }
+          _result = Article(_tmpId,_tmpName,_tmpCategory,_tmpStatus,_tmpDescription,_tmpOwner,_tmpPartner,_tmpQuantity,_tmpLocation,_tmpScene,_tmpCosts,_tmpPrice,_tmpContractId,_tmpNotes,_tmpHardwareId,_tmpDeleted,_tmpUpdatedAt,_tmpImagePath,_tmpImageBase64)
         } else {
           _result = null
         }

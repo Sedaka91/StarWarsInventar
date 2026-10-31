@@ -25,7 +25,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,6 +33,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -47,15 +48,11 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.starwars.inventar.data.Article
-import com.starwars.inventar.data.ArticleCategory
-import com.starwars.inventar.data.ArticleStatus
 import com.starwars.inventar.data.Contract
 import com.starwars.inventar.data.ContractStatus
-import com.starwars.inventar.data.ContractType
 import com.starwars.inventar.data.UserConfig
 import com.starwars.inventar.ui.InventoryViewModel
 import com.starwars.inventar.ui.components.DataRow
@@ -72,10 +69,10 @@ import com.starwars.inventar.ui.screens.ContractListContent
 import com.starwars.inventar.ui.screens.SettingsDialog
 import com.starwars.inventar.ui.screens.WlanSyncDialog
 import com.starwars.inventar.ui.theme.DatapadBgTop
-import com.starwars.inventar.ui.theme.DatapadTheme
 import com.starwars.inventar.ui.theme.HoloAmber
 import com.starwars.inventar.ui.theme.HoloCyan
 import com.starwars.inventar.ui.theme.HoloGreen
+import com.starwars.inventar.ui.theme.HoloRed
 import com.starwars.inventar.ui.theme.TextDim
 import kotlinx.coroutines.launch
 
@@ -116,6 +113,11 @@ fun TabletMainLayout(viewModel: InventoryViewModel) {
             viewModel.reloadFromDisk()
             Toast.makeText(context, "JSON-Dateien vom Datenträger neu geladen", Toast.LENGTH_SHORT).show()
         },
+        onClearAllData = {
+            viewModel.clearAllData {
+                Toast.makeText(context, "Alle Daten gelöscht – Blank State wiederhergestellt", Toast.LENGTH_SHORT).show()
+            }
+        },
         onSaveConfig = { config ->
             viewModel.saveUserConfig(config) {
                 Toast.makeText(context, "Konfiguration gespeichert", Toast.LENGTH_SHORT).show()
@@ -135,43 +137,34 @@ fun CompanyIdentityCard(
     userConfig: UserConfig,
     onOpenSettings: () -> Unit
 ) {
-    HoloPanel(accent = HoloCyan, title = "Identität & Firma", onClick = onOpenSettings) {
+    HoloPanel(accent = HoloAmber, title = null, onClick = onOpenSettings) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            Column(Modifier.weight(1f)) {
+                Text(
+                    text = userConfig.companyName,
+                    style = MaterialTheme.typography.titleLarge,
+                    color = HoloAmber
+                )
+                Text(
+                    text = "Bediener: ${userConfig.userName}",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = TextDim
+                )
+            }
+            // Firmenlogo rechts vom Firmennamen, 50% größer (96.dp)
             Box(
-                modifier = Modifier
-                    .size(44.dp)
-                    .clip(SmallCutShape)
-                    .background(HoloCyan.copy(alpha = 0.2f))
-                    .border(1.dp, HoloCyan, SmallCutShape),
+                modifier = Modifier.size(96.dp),
                 contentAlignment = Alignment.Center
             ) {
                 CompanyLogoView(
                     userConfig = userConfig,
-                    modifier = Modifier.size(26.dp),
-                    tint = HoloCyan
+                    modifier = Modifier.fillMaxSize(),
+                    tint = HoloAmber
                 )
             }
-            Column(Modifier.weight(1f)) {
-                Text(
-                    text = userConfig.companyName,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = HoloCyan
-                )
-                Text(
-                    text = "Bediener: ${userConfig.userName}",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = HoloAmber
-                )
-            }
-            Icon(
-                imageVector = Icons.Default.Settings,
-                contentDescription = "Einstellungen",
-                tint = HoloCyan,
-                modifier = Modifier.size(20.dp)
-            )
         }
     }
 }
@@ -179,8 +172,33 @@ fun CompanyIdentityCard(
 @Composable
 fun DatapadDrawerContent(
     storagePath: String,
+    onClearAllData: () -> Unit,
     onCloseDrawer: () -> Unit
 ) {
+    var showConfirmDialog by remember { mutableStateOf(false) }
+
+    if (showConfirmDialog) {
+        AlertDialog(
+            onDismissRequest = { showConfirmDialog = false },
+            title = { Text("Alle Daten löschen?") },
+            text = { Text("Möchtest du wirklich alle Artikel, Verträge und Bilder unwiderruflich löschen und das Datapad auf den Blank State zurücksetzen?") },
+            confirmButton = {
+                TextButton(onClick = {
+                    showConfirmDialog = false
+                    onClearAllData()
+                    onCloseDrawer()
+                }) {
+                    Text("ALLES LÖSCHEN", color = HoloRed)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showConfirmDialog = false }) {
+                    Text("ABBRECHEN")
+                }
+            }
+        )
+    }
+
     ModalDrawerSheet(
         drawerContainerColor = DatapadBgTop,
         modifier = Modifier.width(320.dp)
@@ -212,6 +230,14 @@ fun DatapadDrawerContent(
             Spacer(Modifier.weight(1f))
 
             DatapadButton(
+                text = "⚠️ WERKSEINSTELLUNG / BLANK",
+                onClick = { showConfirmDialog = true },
+                accent = HoloRed,
+                filled = false,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            DatapadButton(
                 text = "SCHLIESSEN",
                 onClick = onCloseDrawer,
                 accent = HoloCyan,
@@ -237,6 +263,7 @@ fun TabletMainLayoutContent(
     activeRoute: WorkspaceRoute,
     onNavigate: (WorkspaceRoute) -> Unit,
     onReloadDisk: () -> Unit,
+    onClearAllData: () -> Unit,
     onOpenSync: () -> Unit = {},
     onSaveConfig: (UserConfig) -> Unit = {},
     getArticle: suspend (String) -> Article? = { null },
@@ -274,6 +301,7 @@ fun TabletMainLayoutContent(
         drawerContent = {
             DatapadDrawerContent(
                 storagePath = storagePath,
+                onClearAllData = onClearAllData,
                 onCloseDrawer = {
                     scope.launch { drawerState.close() }
                 }
@@ -537,47 +565,5 @@ fun TabletMainLayoutContent(
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true, widthDp = 1024, heightDp = 600)
-@Composable
-private fun TabletMainLayoutPreview() {
-    val sampleArticles = listOf(
-        Article(
-            id = "SW-HW-TEST_1",
-            name = "DL-44 Schwerer Blaster",
-            category = ArticleCategory.WEAPON,
-            status = ArticleStatus.BEREIT,
-            owner = "Captain Solo",
-            quantity = 1,
-            costs = 500.0,
-            price = 1200.0
-        )
-    )
-    val sampleContracts = listOf(
-        Contract(
-            id = "SW-HW-TEST_C1",
-            contractNumber = "K-2024-SW1",
-            title = "Beschaffung Blaster-Zellen",
-            type = ContractType.BESCHAFFUNG,
-            status = ContractStatus.LAUFEND,
-            owner = "Karthon Logistik",
-            partner = "Black Sun",
-            costs = 12000.0,
-            price = 18000.0
-        )
-    )
-
-    DatapadTheme {
-        TabletMainLayoutContent(
-            articles = sampleArticles,
-            contracts = sampleContracts,
-            userConfig = UserConfig(companyName = "Logistik-Firma", userName = "Spieler", logoPreset = "CARGO"),
-            storagePath = "inventory",
-            activeRoute = WorkspaceRoute.ArticleList,
-            onNavigate = {},
-            onReloadDisk = {}
-        )
     }
 }

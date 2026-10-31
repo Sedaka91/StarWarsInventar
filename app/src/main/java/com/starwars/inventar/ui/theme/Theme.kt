@@ -5,11 +5,11 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 
 private val DatapadColorScheme = darkColorScheme(
-    primary = HoloCyan,
+    primary = HoloAmber,
     onPrimary = DatapadBg,
-    secondary = HoloAmber,
+    secondary = HoloGreen,
     onSecondary = DatapadBg,
-    tertiary = HoloGreen,
+    tertiary = HoloAmber,
     background = DatapadBg,
     onBackground = TextPrimary,
     surface = DatapadSurface,
@@ -18,7 +18,7 @@ private val DatapadColorScheme = darkColorScheme(
     onSurfaceVariant = TextDim,
     surfaceContainerHigh = DatapadSurfaceHigh,
     surfaceContainerHighest = DatapadSurfaceHigh,
-    outline = HoloCyan.copy(alpha = 0.5f),
+    outline = HoloAmber.copy(alpha = 0.5f),
     error = HoloRed
 )
 
